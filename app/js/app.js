@@ -9,6 +9,7 @@ System.register(["./controllers/NegociacaoController"], function (exports_1, con
             }
         ],
         execute: function () {
+            alert("oi");
             negociacaoController = new NegociacaoController_1.NegociacaoController();
             $(".form").submit(negociacaoController.adiciona.bind(negociacaoController));
         }

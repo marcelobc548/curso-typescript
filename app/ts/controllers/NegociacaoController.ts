@@ -1,7 +1,5 @@
-import { MensagemView } from "../views/MensagemView";
-import { NegociacoesView } from "../views/NegociacoesView";
-import { Negociacao } from "../models/Negociacao";
-import { Negociacoes } from "../models/Negociacoes";
+import { MensagemView, NegociacoesView } from "../views/index";
+import { Negociacao, Negociacoes } from "../models/index";
 
 export class NegociacaoController {
 
@@ -31,7 +29,6 @@ export class NegociacaoController {
         this._negociacoes.adiciona(negociacao);
         this._negociacoesView.update(this._negociacoes);
         this._mensagemView.update("Negociação adicionada com sucesso.");
-
     }
 
 
