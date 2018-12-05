@@ -1,6 +1,6 @@
 export function logarTempoExecucao(mostrarParametros: boolean = false, mostrarRetorno: boolean = false): Function {
 
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor): void {
+    return function (method: any, propertyKey: string, descriptor: PropertyDescriptor): void {
         const metodoOriginal = descriptor.value;
         //
         descriptor.value = function (...args: any[]) {

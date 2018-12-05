@@ -1,6 +1,6 @@
 export function injetarDom(seletorComponente: string): Function {
 
-    return function (target: any, key: string, descriptor: PropertyDescriptor): void {
+    return function (property: any, key: string, descriptor: PropertyDescriptor): void {
         let componente: JQuery;
         //
         const getter = function (): JQuery {
@@ -11,7 +11,7 @@ export function injetarDom(seletorComponente: string): Function {
             return componente;
         }
         //
-        Object.defineProperty(target, key, { get: getter });
+        Object.defineProperty(property, key, { get: getter });
     }
 
 }

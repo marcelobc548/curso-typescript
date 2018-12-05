@@ -5,14 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "launch",
-            "name": "Executar Programa",
-            "program": "${workspaceFolder}/index.js",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/app/js/**/*.js"
-            ]
+            "type": "firefox",
+            "request": "attach",
+            "name": "Attach"
         }
     ]
 }

@@ -2,7 +2,7 @@ System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function injetarDom(seletorComponente) {
-        return function (target, key, descriptor) {
+        return function (property, key, descriptor) {
             let componente;
             const getter = function () {
                 if (!componente) {
@@ -11,7 +11,7 @@ System.register([], function (exports_1, context_1) {
                 }
                 return componente;
             };
-            Object.defineProperty(target, key, { get: getter });
+            Object.defineProperty(property, key, { get: getter });
         };
     }
     exports_1("injetarDom", injetarDom);
