@@ -1,4 +1,4 @@
-System.register(["./logarTempoExecucao.js"], function (exports_1, context_1) {
+System.register(["./logarTempoExecucao.js", "./injetarDom.js"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function exportStar_1(m) {
@@ -12,6 +12,9 @@ System.register(["./logarTempoExecucao.js"], function (exports_1, context_1) {
         setters: [
             function (logarTempoExecucao_js_1_1) {
                 exportStar_1(logarTempoExecucao_js_1_1);
+            },
+            function (injetarDom_js_1_1) {
+                exportStar_1(injetarDom_js_1_1);
             }
         ],
         execute: function () {

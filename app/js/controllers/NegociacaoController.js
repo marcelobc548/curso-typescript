@@ -29,9 +29,6 @@ System.register(["../views/index.js", "../models/index.js", "../util/index.js", 
                     this._negociacoes = new index_js_2.Negociacoes();
                     this._negociacoesView = new index_js_1.NegociacoesView("#negociacoesView");
                     this._mensagemView = new index_js_1.MensagemView("#mensagemView");
-                    this._inputData = $("#data");
-                    this._inputQuantidade = $("#quantidade");
-                    this._inputValor = $("#valor");
                     this._negociacoesView.update(this._negociacoes);
                 }
                 adiciona(event) {
@@ -48,8 +45,14 @@ System.register(["../views/index.js", "../models/index.js", "../util/index.js", 
                 }
             };
             __decorate([
-                index_js_4.logarTempoExecucao()
-            ], NegociacaoController.prototype, "adiciona", null);
+                index_js_4.injetarDom("#data")
+            ], NegociacaoController.prototype, "_inputData", void 0);
+            __decorate([
+                index_js_4.injetarDom("#quantidade")
+            ], NegociacaoController.prototype, "_inputQuantidade", void 0);
+            __decorate([
+                index_js_4.injetarDom("#valor")
+            ], NegociacaoController.prototype, "_inputValor", void 0);
             exports_1("NegociacaoController", NegociacaoController);
         }
     };
