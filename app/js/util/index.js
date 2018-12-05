@@ -1,4 +1,4 @@
-System.register(["./Negociacao.js", "./Negociacoes.js"], function (exports_1, context_1) {
+System.register(["./DateUtil.js"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     function exportStar_1(m) {
@@ -10,11 +10,8 @@ System.register(["./Negociacao.js", "./Negociacoes.js"], function (exports_1, co
     }
     return {
         setters: [
-            function (Negociacao_js_1_1) {
-                exportStar_1(Negociacao_js_1_1);
-            },
-            function (Negociacoes_js_1_1) {
-                exportStar_1(Negociacoes_js_1_1);
+            function (DateUtil_js_1_1) {
+                exportStar_1(DateUtil_js_1_1);
             }
         ],
         execute: function () {

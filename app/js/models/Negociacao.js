@@ -11,6 +11,9 @@ System.register([], function (exports_1, context_1) {
                     this.quantidade = quantidade;
                     this.valor = valor;
                 }
+                get volume() {
+                    return this.quantidade * this.valor;
+                }
             };
             exports_1("Negociacao", Negociacao);
         }

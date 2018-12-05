@@ -1,5 +1,7 @@
-import { MensagemView, NegociacoesView } from "../views/index";
-import { Negociacao, Negociacoes } from "../models/index";
+import { MensagemView, NegociacoesView } from "../views/index.js";
+import { Negociacao, Negociacoes } from "../models/index.js";
+import { DateUtil } from "../util/index.js"
+import { logarTempoExecucao } from "../decorators/index.js";
 
 export class NegociacaoController {
 
@@ -17,11 +19,18 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoes);
     }
 
-    adiciona(event: Event) {
+    @logarTempoExecucao()
+    adiciona(event: Event): void {
         event.preventDefault();
 
+        let data = DateUtil.toDate(<string>this._inputData.val());
+        if (!DateUtil.ehDiaUtil(data)) {
+            this._mensagemView.update("Não são permitidas negociações em sábados ou domingos.");
+            return;
+        }
+
         const negociacao = new Negociacao(
-            new Date((<string>this._inputData.val()).replace(/-/g, "-")),
+            data,
             parseInt(<string>this._inputQuantidade.val()),
             parseFloat(<string>this._inputValor.val()),
         );
@@ -30,6 +39,5 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoes);
         this._mensagemView.update("Negociação adicionada com sucesso.");
     }
-
 
 }
