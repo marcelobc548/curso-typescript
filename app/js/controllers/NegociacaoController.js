@@ -31,7 +31,7 @@ System.register(["../views/index.js", "../models/index.js", "../util/index.js", 
                     this._mensagemView = new index_js_1.MensagemView("#mensagemView");
                     this._negociacoesView.update(this._negociacoes);
                 }
-                adiciona(event) {
+                adicionar(event) {
                     event.preventDefault();
                     let data = index_js_3.DateUtil.toDate(this._inputData.val());
                     if (!index_js_3.DateUtil.ehDiaUtil(data)) {
@@ -42,6 +42,24 @@ System.register(["../views/index.js", "../models/index.js", "../util/index.js", 
                     this._negociacoes.adiciona(negociacao);
                     this._negociacoesView.update(this._negociacoes);
                     this._mensagemView.update("Negociação adicionada com sucesso.");
+                }
+                importarDados(event) {
+                    let houveErro = function (res) {
+                        if (res.ok) {
+                            return res;
+                        }
+                        else {
+                            throw new Error(res.statusText);
+                        }
+                    };
+                    window.fetch("http://localhost:8080/dados")
+                        .then(res => houveErro(res))
+                        .then(res => res.json())
+                        .then((dados) => {
+                        dados.map(dado => new index_js_2.Negociacao(new Date(), dado.vezes, dado.montante)).forEach(negociacao => this._negociacoes.adiciona(negociacao));
+                        this._negociacoesView.update(this._negociacoes);
+                    })
+                        .catch(err => console.log(err.message));
                 }
             };
             __decorate([

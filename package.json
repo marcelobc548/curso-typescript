@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jquery": "^3.3.22",
     "concurrently": "^4.1.0",
     "eslint": "^4.17.0",
     "lite-server": "^2.4.0",
@@ -21,7 +22,6 @@
     "typescript": "^3.2.1"
   },
   "dependencies": {
-    "@types/jquery": "^3.3.22",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
   }
