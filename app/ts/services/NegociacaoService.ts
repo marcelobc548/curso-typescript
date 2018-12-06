@@ -9,7 +9,12 @@ export class NegociacaoService {
             .then(
                 (dados: NegociacaoWeb[]) => dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante))
             )
-            .catch(err => console.log(err.message));
+            .catch(
+                err => {
+                    console.log(err.message);
+                    throw new Error("Não foi possível importar os dados.");
+                }
+            );
     }
 
 }

@@ -46,7 +46,7 @@ export class NegociacaoController {
     }
 
     @throtlle()
-    importarDados(): void {
+    async importarDados() {
 
         const houveErro: ErrorHandler = function (res: Response): Response {
             if (res.ok) {
@@ -57,16 +57,26 @@ export class NegociacaoController {
             }
         }
 
-        this._negociacaoService.obterNegociacoes(houveErro)
-            .then(
-                negociacoes => {
-                    negociacoes.forEach(
-                        negociacao => this._negociacoes.adiciona(negociacao)
-                    );
-                    this._negociacoesView.update(this._negociacoes);
-                }
-            )
-            .catch(err => console.log(err.message));
+        try {
+            const negociacoes = await this._negociacaoService.obterNegociacoes(houveErro);
+            negociacoes.forEach(
+                negociacao => this._negociacoes.adiciona(negociacao)
+            );
+            this._negociacoesView.update(this._negociacoes);
+        }
+        catch (erro) {
+            this._mensagemView.update(erro.message);
+        }
+
+        // .then(
+        //     negociacoes => {
+        //         negociacoes.forEach(
+        //             negociacao => this._negociacoes.adiciona(negociacao)
+        //         );
+        //         this._negociacoesView.update(this._negociacoes);
+        //     }
+        // )
+        // .catch(err => console.log(err.message));
 
     }
 
