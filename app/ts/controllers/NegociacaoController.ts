@@ -1,7 +1,8 @@
 import { MensagemView, NegociacoesView } from "../views/index.js";
 import { Negociacao, NegociacaoWeb, Negociacoes } from "../models/index.js";
 import { DateUtil } from "../util/index.js";
-import { injetarDom } from "../decorators/index.js";
+import { injetarDom, throtlle } from "../decorators/index.js";
+import { NegociacaoService } from "../services/index.js";
 
 export class NegociacaoController {
 
@@ -14,6 +15,7 @@ export class NegociacaoController {
     private _negociacoes = new Negociacoes();
     private _negociacoesView = new NegociacoesView("#negociacoesView");
     private _mensagemView = new MensagemView("#mensagemView");
+    private _negociacaoService = new NegociacaoService();
 
     constructor() {
         // this._inputData = $("#data");
@@ -22,8 +24,8 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoes);
     }
 
-
-    adicionar(event: Event): void {
+    //@throtlle()
+    adicionar(event: Event) {
         event.preventDefault();
 
         let data = DateUtil.toDate(<string>this._inputData.val());
@@ -43,7 +45,8 @@ export class NegociacaoController {
         this._mensagemView.update("Negociação adicionada com sucesso.");
     }
 
-    importarDados(event: Event): void {
+    @throtlle()
+    importarDados(): void {
 
         let houveErro = function (res: Response): Response {
             if (res.ok) {
@@ -54,20 +57,17 @@ export class NegociacaoController {
             }
         }
 
-        window.fetch("http://localhost:8080/dados")
-            .then(res => houveErro(res))
-            .then(res => res.json())
+        this._negociacaoService.obterNegociacoes(houveErro)
             .then(
-                (dados: NegociacaoWeb[]) => {
-                    dados.map(
-                        dado => new Negociacao(new Date(), dado.vezes, dado.montante)
-                    ).forEach(
+                negociacoes => {
+                    negociacoes.forEach(
                         negociacao => this._negociacoes.adiciona(negociacao)
                     );
                     this._negociacoesView.update(this._negociacoes);
                 }
             )
             .catch(err => console.log(err.message));
+
     }
 
 }
