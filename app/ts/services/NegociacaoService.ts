@@ -2,7 +2,7 @@ import { Negociacao, NegociacaoWeb } from "../models/index.js";
 
 export class NegociacaoService {
 
-    obterNegociacoes(errorHandler: Function): Promise<Negociacao[]> {
+    obterNegociacoes(errorHandler: ErrorHandler): Promise<Negociacao[]> {
         return <Promise<Negociacao[]>>window.fetch("http://localhost:8080/dados")
             .then(res => errorHandler(res))
             .then(res => res.json())
@@ -11,5 +11,11 @@ export class NegociacaoService {
             )
             .catch(err => console.log(err.message));
     }
+
+}
+
+export interface ErrorHandler {
+
+    (response: Response): Response;
 
 }

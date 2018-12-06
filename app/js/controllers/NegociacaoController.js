@@ -48,7 +48,7 @@ System.register(["../views/index.js", "../models/index.js", "../util/index.js", 
                     this._mensagemView.update("Negociação adicionada com sucesso.");
                 }
                 importarDados() {
-                    let houveErro = function (res) {
+                    const houveErro = function (res) {
                         if (res.ok) {
                             return res;
                         }

@@ -2,7 +2,7 @@ import { MensagemView, NegociacoesView } from "../views/index.js";
 import { Negociacao, NegociacaoWeb, Negociacoes } from "../models/index.js";
 import { DateUtil } from "../util/index.js";
 import { injetarDom, throtlle } from "../decorators/index.js";
-import { NegociacaoService } from "../services/index.js";
+import { NegociacaoService, ErrorHandler } from "../services/index.js";
 
 export class NegociacaoController {
 
@@ -48,7 +48,7 @@ export class NegociacaoController {
     @throtlle()
     importarDados(): void {
 
-        let houveErro = function (res: Response): Response {
+        const houveErro: ErrorHandler = function (res: Response): Response {
             if (res.ok) {
                 return res;
             }
